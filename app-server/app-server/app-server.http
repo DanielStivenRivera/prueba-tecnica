@@ -1,0 +1,6 @@
+@app_server_HostAddress = http://localhost:5207
+
+GET {{app_server_HostAddress}}/auth/
+Accept: application/json
+
+###

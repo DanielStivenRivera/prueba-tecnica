@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app-server", "app-server\app-server.csproj", "{0FDF7320-BBC9-444D-9DDD-414718927262}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FA210FC-CD5B-4299-9A12-176B3415EA32}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app-server.Tests", "app-server.Tests\app-server.Tests.csproj", "{5E694188-60DD-44BD-A263-99F583DBC32C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FDF7320-BBC9-444D-9DDD-414718927262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FDF7320-BBC9-444D-9DDD-414718927262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FDF7320-BBC9-444D-9DDD-414718927262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FDF7320-BBC9-444D-9DDD-414718927262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E694188-60DD-44BD-A263-99F583DBC32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E694188-60DD-44BD-A263-99F583DBC32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E694188-60DD-44BD-A263-99F583DBC32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E694188-60DD-44BD-A263-99F583DBC32C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

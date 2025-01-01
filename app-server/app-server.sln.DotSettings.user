@@ -1,0 +1,11 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=efeb79f7_002D9e68_002D4bf7_002Db330_002Dc0654eb48091/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthControllerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Controllers.AuthControllerTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Controllers.ReservationsControllerTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Adapters.ReservationAdapterTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Application.Services.ReservationServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Adapters.UserAdapterTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Application.Services.UserServiceTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
