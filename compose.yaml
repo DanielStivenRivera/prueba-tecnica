@@ -1,8 +1,6 @@
-﻿version: '3.8'
-
-services:
+﻿services:
   postgres:
-    image: postgres:15
+    image: postgres:latest
     container_name: postgres
     environment:
       POSTGRES_USER: user
@@ -15,7 +13,7 @@ services:
 
   app-server:
     build:
-      context: ./app-server
+      context: ./app-server/app-server
       dockerfile: Dockerfile
     environment:
       ConnectionStrings__DefaultConnection: "Host=postgres;Database=postgres;Username=user;Password=pass123"

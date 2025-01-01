@@ -80,7 +80,26 @@ public class Program
                 dbContext.SaveChanges();
             }
         }
+        
+        AddDefaultSpaces(dbContext);
 
         app.Run();
+    }
+
+    private static void AddDefaultSpaces(ApplicationDbContext dbContext)
+    {
+        if (!dbContext.Spaces.Any())
+        {
+            var defaultSpaces = new List<Space>
+            {
+                new Space { name = "Place 1", capacity = 20 },
+                new Space { name = "Place 2", capacity = 30 },
+                new Space { name = "Place 3", capacity = 50 },
+                new Space { name = "Place 4", capacity = 25 },
+                new Space { name = "Place 5", capacity = 45 },
+            };
+            dbContext.Spaces.AddRange(defaultSpaces);
+            dbContext.SaveChanges();
+        }
     }
 }

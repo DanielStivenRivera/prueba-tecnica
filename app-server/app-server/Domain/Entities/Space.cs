@@ -7,6 +7,7 @@ namespace app_server.Domain.Entities;
 public class Space
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int id { get; set; }
     [Required]
     public string name { get; set; }
