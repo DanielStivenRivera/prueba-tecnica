@@ -7,5 +7,6 @@
     &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Application.Services.ReservationServiceTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Adapters.UserAdapterTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.Application.Services.UserServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5E694188-60DD-44BD-A263-99F583DBC32C::net8.0::app_server.Tests.AuthTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

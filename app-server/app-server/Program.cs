@@ -1,3 +1,4 @@
+using System.Text;
 using app_server.Adapters;
 using app_server.Application.services;
 using app_server.Domain.Entities;
@@ -5,10 +6,11 @@ using app_server.Domain.Exceptions;
 using app_server.Infrastructure.Persistence;
 using app_server.Infrastructure.Persistence.Repositories;
 using app_server.Infrastructure.Security;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+
+namespace app_server;
 
 public class Program
 {
@@ -65,10 +67,12 @@ public class Program
 
         app.Use(async (context, next) =>
         {
-            if (!context.User.Identity?.IsAuthenticated ?? false)
+            
+            if ((!context.User.Identity?.IsAuthenticated ?? false) && context.Request.ContentType.Equals("text/plain", StringComparison.OrdinalIgnoreCase))
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                await context.Response.WriteAsync("Unauthorized - No estás autenticado.");
+                await context.Response.WriteAsJsonAsync(new {message = "Unauthorized"});
+                
                 return;
             }
 

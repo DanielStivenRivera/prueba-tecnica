@@ -15,6 +15,7 @@ docker-compose ps
 ```
 
 ## EJECUCIÓN DE PRUEBAS UNITARIAS
+### ES NECESARIO EJECUTAR PRIMERO EL CONTENEDOR DE DOCKER
 ### <li> Backend
 #### <li>Abrir una terminal y navegar a la carpeta de la solución de visual studio y ejecutar el siguiente comando
 ```bash
