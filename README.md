@@ -51,4 +51,5 @@ Se crearon servicios para conectar con cada uno de los endpoints expuestos por e
 
 Adicionalmente, se desarrolló un servicio para gestionar los dos diálogos que se muestran en la aplicación, lo que permite reutilizar el código y evitar duplicaciones. Para la parte visual, se utilizó Tailwind CSS para estilizar la interfaz de usuario de manera eficiente y flexible.
 
-
+# NOTA
+EL repositorio cuenta con un archivo swagger.json para la documentación del backend
