@@ -1,0 +1,36 @@
+<div>
+  <div class="min-h-14 min-w-full items-center p-4 py-2 justify-between flex bg-slate-900">
+    <span class="text-xl font-bold text-blue-400">RESERVAS</span>
+    @if (profileService._profile()) {
+      <div class="flex">
+        <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon class="text-white">account_circle</mat-icon></button>
+        <mat-menu #menu="matMenu" class="custom-menu-panel">
+          <button mat-menu-item (click)="goToProfile()">
+            <span>Perfil</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <span>Cerrar sesión</span>
+          </button>
+        </mat-menu>
+      </div>
+    } @else {
+      <div class="flex">
+        <button type="button"
+                (click)="auth('login')"
+                class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 mr-4"
+        >
+          INICIAR SESIÓN
+        </button>
+        <button type="button"
+                (click)="auth('register')"
+                class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
+        >
+          REGISTRARSE
+        </button>
+      </div>
+    }
+  </div>
+  <div class="p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

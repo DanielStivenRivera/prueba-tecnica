@@ -1,0 +1,52 @@
+@if (space()) {
+  <div class="w-full max-w-6xl mx-auto p-4 bg-slate-800 rounded-md justify-between">
+    <div class="flex items-center justify-between mb-4">
+      <button type="button"
+              (click)="previousWeek()"
+              class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
+      >
+        Anterior
+      </button>
+      <h2 class="text-xl font-bold text-blue-400">{{space()?.name}}</h2>
+      <button type="button"
+              (click)="nextWeek()"
+              class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
+      >
+        Siguiente
+      </button>
+    </div>
+
+    <div class="overflow-x-auto">
+      <div class="min-w-full border rounded">
+        <div class="grid grid-cols-8 border-b">
+          <div class="p-2 border-r bg-blue-700"></div>
+          @for ( day of daysOfWeek(); track day) {
+            <div class="p-2 text-center border-r bg-blue-700 font-semibold overflow-clip text-gray-50">
+              {{day}}
+              <div class="text-sm text-gray-200">{{formatDate(getDate(day))}}</div>
+            </div>
+          }
+        </div>
+        <div class="divide-y">
+          @for (hour of hours(); track hour) {
+            <div class="grid grid-cols-8">
+              <div class="p-2 border-r text-sm font-semibold text-center bg-blue-700 text-gray-50">
+                {{hour}}:00
+              </div>
+              @for (day of daysOfWeek(); track day) {
+                @if (!dateIsInPast(day) && !hourIsInPast(day, hour)) {
+                  <div class="p-2 border-r min-h-10 relative"
+                       [ngClass]="existReservation(day, hour) ? 'bg-red-500' : ''">
+                  </div>
+                } @else {
+                  <div class="p-2 border-r min-h-10 relative bg-gray-700">
+                  </div>
+                }
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}

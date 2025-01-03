@@ -1,0 +1,17 @@
+@if (profileService._profile()) {
+  <div class="flex min-w-full mb-4 justify-end ">
+    <button type="button"
+            (click)="createReservation()"
+            class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
+    >
+      RESERVAR
+    </button>
+  </div>
+}
+@for (space of spaces(); track space) {
+  <div class="mb-8">
+    <app-calendar [space]="space"></app-calendar>
+  </div>
+} @empty {
+  <span class="text-gray-200">No hay espacios disponibles</span>
+}

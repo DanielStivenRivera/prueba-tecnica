@@ -1,0 +1,31 @@
+@if (profileService._profile()) {
+  <div class="flex flex-col">
+    <div class="min-w-full bg-slate-800 flex flex-col p-4 rounded-md mb-4">
+      <span class="text-blue-700 text-xl mb-2">{{ profileService._profile().username }}</span>
+      <span class="text-gray-400 text-lg">{{ profileService._profile().email }}</span>
+    </div>
+
+    <div class="min-w-full bg-slate-800 flex flex-col p-4 rounded-md">
+      <span class="text-blue-700 text-xl mb-4">Reservaciones</span>
+      @for (reservation of reservations(); track reservation) {
+        <div class="flex flex-row  min-w-full mb-4 justify-between items-center  bg-slate-900 p-2 rounded">
+          <div class="flex flex-col">
+            <span class="font-medium text-gray-100">Lugar: {{ reservation.space.name }}</span>
+            <span class="font-light text-sm text-gray-200">Capacidad: {{ reservation.space.capacity }}</span>
+            <span class="font-light text-sm text-gray-200">
+              Inicio: {{ reservation.startDate | date:'dd/MM/yyyy hh:mm a' }}
+            </span>
+            <span class="font-light text-sm text-gray-200">
+              Fin: {{ reservation.endDate | date:'dd/MM/yyyy hh:mm a' }}
+            </span>
+          </div>
+          <button mat-icon-button (click)="deleteReservation(reservation.id)">
+            <mat-icon class="text-red-500">delete</mat-icon>
+          </button>
+        </div>
+      } @empty {
+        <span class="font-semibold text-xl text-gray-200">No tienes reservas.</span>
+      }
+    </div>
+  </div>
+}

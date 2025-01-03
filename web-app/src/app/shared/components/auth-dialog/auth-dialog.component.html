@@ -1,0 +1,47 @@
+@if (this.authForm) {
+  <div class="min-w-full p-4 bg-slate-900 border-blue-400">
+    <div class="min-w-full flex justify-around mb-4">
+      <button (click)="changeForm('login')"
+        type="button" class="cursor-pointer p-4 text-white rounded"
+        [ngClass]="type() === 'login' ? 'bg-blue-700' : ''">
+        INICIO DE SESIÓN
+      </button>
+      <button (click)="changeForm('register')"
+        type="button" class="cursor-pointer p-4 text-white rounded"
+              [ngClass]="type() === 'register' ? 'bg-blue-700' : ''">
+        REGISTRO
+      </button>
+    </div>
+    <form [formGroup]="authForm" class="flex flex-col">
+      @if (type() === 'register') {
+        <mat-form-field class="min-w-full">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="username">
+        </mat-form-field>
+      }
+      <mat-form-field class="min-w-full">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="min-w-full">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
+      <div class="min-w-full flex justify-between">
+        <button type="button"
+                (click)="cancel()"
+                class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 mr-4"
+        >
+          CANCELAR
+        </button>
+        <button type="submit"
+                (click)="save()"
+                class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 mr-4"
+        >
+          {{type() === 'login' ? 'INICIAR SESIÓN' : 'REGISTRARSE'}}
+        </button>
+
+      </div>
+    </form>
+  </div>
+}

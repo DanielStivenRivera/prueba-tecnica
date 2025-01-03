@@ -1,0 +1,56 @@
+@if (reservationForm) {
+    <form [formGroup]="reservationForm" class="flex flex-col min-w-full p-4 bg-slate-900 border-blue-400">
+      <div class="min-w-full flex justify-center items-center">
+        <span class="text-xl font-bold text-blue-700 mb-4">CREAR RESERVA</span>
+      </div>
+      <mat-form-field>
+        <mat-label>Lugar</mat-label>
+        <mat-select formControlName="place">
+          @for(option of spaces(); track option.id) {
+            <mat-option [value]="option.id">{{option.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input [min]="minDate" matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Hora Inicio</mat-label>
+        <input matInput
+               matTimepickerMin="8:00"
+               matTimepickerMax="21:00"
+               [matTimepicker]="hoursPicker" formControlName="startHour">
+        <mat-timepicker-toggle matIconSuffix [for]="hoursPicker"/>
+        <mat-timepicker interval="1h" #hoursPicker/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Hora Fin</mat-label>
+        <input matInput
+               matTimepickerMin="8:00"
+               matTimepickerMax="21:00"
+               [matTimepicker]="hoursPicker2" formControlName="endHour">
+        <mat-timepicker-toggle matIconSuffix [for]="hoursPicker2"/>
+        <mat-timepicker interval="1h" #hoursPicker2/>
+      </mat-form-field>
+
+      <div class="min-w-full flex justify-between">
+        <button type="button"
+                (click)="cancel()"
+                class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 mr-4"
+        >
+          CANCELAR
+        </button>
+        <button type="submit"
+                (click)="save()"
+                class="flex items-center px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 mr-4"
+        >
+          RESERVAR
+        </button>
+
+      </div>
+    </form>
+}
+
