@@ -28,7 +28,7 @@ public class Program
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidateLifetime = true,
+                    ValidateLifetime = false,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
@@ -47,13 +47,28 @@ public class Program
         builder.Services.AddScoped<JwtTokenGenerator>();
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<UserAdapter>();
+        builder.Services.AddScoped<AuthAdapter>();
         builder.Services.AddScoped<ReservationRepository>();
         builder.Services.AddScoped<ReservationService>();
         builder.Services.AddScoped<ReservationAdapter>();
+        builder.Services.AddScoped<SpaceRepository>();
+        builder.Services.AddScoped<SpaceService>();
+        builder.Services.AddScoped<SpaceAdapter>();
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAngularClient", policy =>
+            {
+                policy.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
 
         var app = builder.Build();
 
@@ -63,12 +78,13 @@ public class Program
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
-
-
+        app.UseCors("AllowAngularClient");
+        
         app.Use(async (context, next) =>
         {
             
-            if ((!context.User.Identity?.IsAuthenticated ?? false) && context.Request.ContentType.Equals("text/plain", StringComparison.OrdinalIgnoreCase))
+            if ((!context.User.Identity?.IsAuthenticated ?? false) &&
+                (context.Request.ContentType?.Equals("text/plain", StringComparison.OrdinalIgnoreCase) ?? false))
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await context.Response.WriteAsJsonAsync(new {message = "Unauthorized"});
@@ -78,6 +94,7 @@ public class Program
 
             await next();
         });
+        
 
         app.MapControllers();
 
@@ -89,7 +106,6 @@ public class Program
 
         if (!dbContext.Database.CanConnectAsync().Result)
         {
-            Console.WriteLine("Cannot connect to the database.");
             return;
         }
 
@@ -98,7 +114,6 @@ public class Program
             var dbContext2 = scope2.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             if (!dbContext2.Database.CanConnectAsync().Result)
             {
-                Console.WriteLine("Cannot connect to the database.");
                 return;
             }
 

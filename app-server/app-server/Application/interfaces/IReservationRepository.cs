@@ -6,6 +6,6 @@ public interface IReservationRepository
 {
     Reservation Save(Reservation reservation);
     Reservation? GetById(int id);
-    IEnumerable<Reservation> Search(DateTime? startDate, DateTime? endDate, int? userId, int? spaceId);
+    IEnumerable<Reservation> Search(DateTime? startDate, DateTime? endDate, int? userId, int? spaceId, bool? fetchPlaces);
     void Delete(int id);
 }

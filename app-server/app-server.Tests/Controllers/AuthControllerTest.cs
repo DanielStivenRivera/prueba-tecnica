@@ -9,13 +9,13 @@ namespace app_server.Tests.Controllers;
 
 public class AuthControllerTest
 {
-    private readonly Mock<UserAdapter> _mockUserAdapter;
+    private readonly Mock<AuthAdapter> _mockUserAdapter;
 
     private readonly Auth _authController;
 
     public AuthControllerTest()
     {
-        _mockUserAdapter = new Mock<UserAdapter>();
+        _mockUserAdapter = new Mock<AuthAdapter>();
         _authController = new Auth(_mockUserAdapter.Object);
     }
 

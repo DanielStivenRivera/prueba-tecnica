@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100dvh; overflow: hidden; }
+
+* {
+  margin: 0;
+}
+
+.custom-dialog-panel {
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: #00000000;
+  }
+
+  .mdc-dialog__surface {
+    background-color: #00000000 !important;
+    border-radius: 12px;
+  }
+}
+
+.custom-menu-panel {
+  background: #0f172a!important;
+  .mat-mdc-menu-item-text {
+    color: white;
+  }
+  .mat-mdc-menu-item:hover {
+    background: #020617!important;
+  }
+}
+
+.mat-mdc-select-panel {
+  background: #0f172a!important;
+  border-color: #020617;
+
+  mat-option {
+    span {
+      color: white!important;
+    }
+    &:hover {
+      background: #020617!important;
+    }
+  }
+}

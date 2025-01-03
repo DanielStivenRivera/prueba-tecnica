@@ -27,17 +27,17 @@ public class ReservationRepository :  IReservationRepository
         return _context.Find<Reservation>(id);
     }
     
-    public virtual IEnumerable<Reservation> Search(DateTime? startDate, DateTime? endDate, int? userId, int? spaceId)
+    public virtual IEnumerable<Reservation> Search(DateTime? startDate, DateTime? endDate, int? userId, int? spaceId, bool? fetchPlaces)
     {
         return _context.Set<Reservation>()
             .Where(r => 
-                (!startDate.HasValue || r.startDate >= startDate) && 
-                (!endDate.HasValue || r.endDate <= endDate) && 
-                (!userId.HasValue || r.userId == userId) && 
+                (!startDate.HasValue || !endDate.HasValue || r.startDate < endDate && r.endDate > startDate) && 
+                (!userId.HasValue || r.userId == userId) &&
                 (!spaceId.HasValue || r.spaceId == spaceId)
             )
             .ToList();
     }
+
     
     public virtual void Delete(int id)
 {

@@ -13,7 +13,7 @@
 
   app-server:
     build:
-      context: ./app-server/app-server
+      context: ./app-server/app-server/
       dockerfile: Dockerfile
     environment:
       ConnectionStrings__DefaultConnection: "Host=postgres;Database=postgres;Username=user;Password=pass123"
@@ -21,6 +21,7 @@
       - postgres
     ports:
       - "8080:8080"
+
 
 volumes:
   postgres_data:

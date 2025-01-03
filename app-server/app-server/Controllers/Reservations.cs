@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace app_server.Controllers;
 
 [ApiController]
-[Route("[Controller]")]
+[Route("reservations")]
 public class Reservations : ControllerBase
 {
 
@@ -23,16 +23,18 @@ public class Reservations : ControllerBase
         var reservations = _reservationAdapter.GetReservations(reservationParams);
         return Ok(reservations);
     }
-    [HttpPost()]
+    
     [Authorize]
+    [HttpPost()]
     public IActionResult CreateReservation([FromBody] CreateReservationRequest createReservationRequest)
     {
         var reservation = _reservationAdapter.CreateReservation(createReservationRequest);
         return Ok(reservation);
     }
     
-    [HttpDelete("{id}")]
     [Authorize]
+    [HttpDelete("{id}")]
+    
     public IActionResult DeleteReservation(int id)
     {
         _reservationAdapter.DeleteReservation(id);

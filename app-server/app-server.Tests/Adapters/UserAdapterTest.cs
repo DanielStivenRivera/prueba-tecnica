@@ -6,15 +6,15 @@ using Moq;
 
 namespace app_server.Tests.Adapters
 {
-    public class UserAdapterTests
+    public class AuthAdapterTests
     {
         private readonly Mock<UserService> _mockUserService;
-        private readonly UserAdapter _userAdapter;
+        private readonly AuthAdapter _authAdapter;
 
-        public UserAdapterTests()
+        public AuthAdapterTests()
         {
             _mockUserService = new Mock<UserService>();
-            _userAdapter = new UserAdapter(_mockUserService.Object);
+            _authAdapter = new AuthAdapter(_mockUserService.Object);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace app_server.Tests.Adapters
             _mockUserService.Setup(service => service.CreateUser(It.IsAny<User>())).Returns("UserCreated");
 
             // Act
-            var result = _userAdapter.RegisterUser(createUserRequest);
+            var result = _authAdapter.RegisterUser(createUserRequest);
 
             // Assert
             Assert.Equal("UserCreated", result);
@@ -67,7 +67,7 @@ namespace app_server.Tests.Adapters
             };
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentException>(() => _userAdapter.LoginUser(loginUserRequest));
+            var exception = Assert.Throws<ArgumentException>(() => _authAdapter.LoginUser(loginUserRequest));
             Assert.Equal("email is required", exception.Message);
         }
 
@@ -82,7 +82,7 @@ namespace app_server.Tests.Adapters
             };
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentException>(() => _userAdapter.LoginUser(loginUserRequest));
+            var exception = Assert.Throws<ArgumentException>(() => _authAdapter.LoginUser(loginUserRequest));
             Assert.Equal("password is required", exception.Message);
         }
 
@@ -100,7 +100,7 @@ namespace app_server.Tests.Adapters
             _mockUserService.Setup(service => service.LoginUser(loginUserRequest.email, loginUserRequest.password)).Returns("LoginSuccess");
 
             // Act
-            var result = _userAdapter.LoginUser(loginUserRequest);
+            var result = _authAdapter.LoginUser(loginUserRequest);
 
             // Assert
             Assert.Equal("LoginSuccess", result);

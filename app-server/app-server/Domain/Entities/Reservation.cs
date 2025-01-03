@@ -18,7 +18,7 @@ public class Reservation
     [Required]
     public DateTime endDate { get; set; }
     
-    public User user { get; set; }
+    public virtual User user { get; set; }
     
-    public Space space { get; set; }
+    public virtual Space space { get; set; }
 }

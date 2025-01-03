@@ -35,6 +35,10 @@ public class ExceptionMiddleware
             {
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsync(JsonSerializer.Serialize(new { message = ex.Message }));
+            } else if (ex is ReservationException)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync(JsonSerializer.Serialize(new { message = ex.Message }));
             }
             else
             {

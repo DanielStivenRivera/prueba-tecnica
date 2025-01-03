@@ -34,7 +34,7 @@ public class ReservationAdapter
     
     public virtual IEnumerable<Reservation> GetReservations(ReservationParams reservationParams)
     {
-        return _reservationService.GetReservations(reservationParams.startDate, reservationParams.endDate, reservationParams.userId, reservationParams.spaceId);
+        return _reservationService.GetReservations(reservationParams.startDate, reservationParams.endDate, reservationParams.userId, reservationParams.spaceId, reservationParams.fetchPlaces);
     }
     
 }

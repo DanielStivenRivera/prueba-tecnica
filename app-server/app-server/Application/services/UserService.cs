@@ -35,14 +35,19 @@ public class UserService
         var user = _userRepository.GetByEmail(email);
         if (user == null)
         {
-            throw new InvalidCredentialsException("email/password incorrect");
+            throw new UnauthorizedAccessException("email/password incorrect");
         }
         if (!BCrypt.Net.BCrypt.Verify(password, user.password))
         {
-            throw new InvalidCredentialsException("email/password incorrect");
+            throw new UnauthorizedAccessException("email/password incorrect");
         }
 
         return _jwtTokenGenerator.GenerateToken(user.id, user.email);
+    }
+
+    public virtual User? getById(int id)
+    {
+        return _userRepository.GetById(id);
     }
     
 }

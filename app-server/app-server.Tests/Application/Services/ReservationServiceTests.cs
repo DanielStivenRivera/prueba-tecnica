@@ -46,7 +46,7 @@ namespace app_server.Tests.Application.Services
                 spaceId = 1
             };
 
-            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), reservation.userId, null))
+            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), reservation.userId, null, null))
                 .Returns(new List<Reservation> { new Reservation() });
 
             // Act & Assert
@@ -66,7 +66,7 @@ namespace app_server.Tests.Application.Services
                 spaceId = 1
             };
 
-            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), null, reservation.spaceId))
+            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), null, reservation.spaceId, null))
                 .Returns(new List<Reservation> { new Reservation() });
 
             // Act & Assert
@@ -86,9 +86,9 @@ namespace app_server.Tests.Application.Services
                 spaceId = 1
             };
 
-            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), reservation.userId, null))
+            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), reservation.userId, null, null))
                 .Returns(Enumerable.Empty<Reservation>());
-            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), null, reservation.spaceId))
+            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), null, reservation.spaceId, null))
                 .Returns(Enumerable.Empty<Reservation>());
             _mockReservationRepository.Setup(repo => repo.Save(It.IsAny<Reservation>())).Returns(reservation);
 
@@ -138,16 +138,16 @@ namespace app_server.Tests.Application.Services
                 new Reservation { userId = 1, spaceId = 2, startDate = DateTime.Now.AddHours(3), endDate = DateTime.Now.AddHours(5) }
             };
 
-            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<int?>(), It.IsAny<int?>()))
+            _mockReservationRepository.Setup(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<int?>(), It.IsAny<int?>(), false))
                 .Returns(mockReservations);
 
             // Act
-            var result = _reservationService.GetReservations(reservationParams.startDate, reservationParams.endDate, reservationParams.userId, reservationParams.spaceId);
+            var result = _reservationService.GetReservations(reservationParams.startDate, reservationParams.endDate, reservationParams.userId, reservationParams.spaceId, false);
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal(mockReservations.Count, result.Count());
-            _mockReservationRepository.Verify(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<int?>(), It.IsAny<int?>()), Times.Once);
+            _mockReservationRepository.Verify(repo => repo.Search(It.IsAny<DateTime?>(), It.IsAny<DateTime?>(), It.IsAny<int?>(), It.IsAny<int?>(), null), Times.Once);
         }
 
     }

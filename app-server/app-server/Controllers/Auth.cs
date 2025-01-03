@@ -6,27 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 namespace app_server.Controllers;
 
 [ApiController]
-[Route("[Controller]")]
+[Route("auth")]
 public class Auth : ControllerBase
 {
-    private readonly UserAdapter _userAdapter;
+    private readonly AuthAdapter _authAdapter;
 
-    public Auth(UserAdapter userAdapter)
+    public Auth(AuthAdapter authAdapter)
     {
-        _userAdapter = userAdapter;
+        _authAdapter = authAdapter;
     }
     
     [HttpPost("register")]
     public IActionResult Register([FromBody] CreateUserRequest createUserRequest)
     {
-        string token = _userAdapter.RegisterUser(createUserRequest);
+        string token = _authAdapter.RegisterUser(createUserRequest);
         return Ok(new TokenResponse { token = token });
     }
     
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginUserRequest loginUserRequest)
     {
-        string token =  _userAdapter.LoginUser(loginUserRequest);
+        string token =  _authAdapter.LoginUser(loginUserRequest);
         return Ok(new TokenResponse {token = token});
     }
 }

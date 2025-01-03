@@ -1,4 +1,5 @@
 ﻿using app_server.Domain.Entities;
+using app_server.Domain.Exceptions;
 using app_server.Infrastructure.Persistence.Repositories;
 
 namespace app_server.Application.services;
@@ -19,23 +20,40 @@ public class ReservationService
         var duration = reservation.endDate - reservation.startDate;
         if (duration < TimeSpan.FromHours(2) || duration > TimeSpan.FromHours(5))
         {
-            throw new InvalidOperationException("Reservation duration must be between 2 and 5 hours");
+            throw new ReservationException("Reservation duration must be between 2 and 5 hours.");
         }
         
-        var existingUserReservations = _reservationRepository.Search(reservation.startDate, reservation.endDate, reservation.userId, null);
-        if (existingUserReservations.Any())
+        var existingSpaceReservations = _reservationRepository.Search(
+            reservation.startDate, 
+            reservation.endDate, 
+            null, 
+            reservation.spaceId,
+            false
+        );
+
+        if (existingSpaceReservations.Any(r =>
+                r.startDate < reservation.endDate && reservation.startDate < r.endDate))
         {
-            throw new InvalidOperationException("User cant have more than one reservation at the same time");
+            throw new ReservationException("The space is already reserved during this time.");
         }
-        
-        var existingSpaceReservations = _reservationRepository.Search(reservation.startDate, reservation.endDate, null, reservation.spaceId);
-        
-        if (existingSpaceReservations.Any())
+
+        var existingUserReservations = _reservationRepository.Search(
+            reservation.startDate, 
+            reservation.endDate, 
+            reservation.userId, 
+            null,
+            false
+        );
+
+        if (existingUserReservations.Any(r =>
+                r.startDate < reservation.endDate && reservation.startDate < r.endDate))
         {
-            throw new InvalidOperationException("Space already reserved for this time");
+            throw new ReservationException("The user already has a reservation during this time.");
         }
+        
         return _reservationRepository.Save(reservation);
     }
+
     
     public virtual void DeleteReservation(int id)
     {
@@ -47,9 +65,9 @@ public class ReservationService
         _reservationRepository.Delete(id);
     }
     
-    public virtual IEnumerable<Reservation> GetReservations(DateTime? startDate, DateTime? endDate, int? userId, int? spaceId)
+    public virtual IEnumerable<Reservation> GetReservations(DateTime? startDate, DateTime? endDate, int? userId, int? spaceId, bool? fetchPlaces)
     {
-        return _reservationRepository.Search(startDate, endDate, userId, spaceId);
+        return _reservationRepository.Search(startDate, endDate, userId, spaceId, fetchPlaces);
     }
     
 }

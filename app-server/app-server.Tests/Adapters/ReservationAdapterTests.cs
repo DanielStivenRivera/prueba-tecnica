@@ -83,7 +83,7 @@ namespace app_server.Tests.Adapters
                 new Reservation { userId = 1, spaceId = 2, startDate = DateTime.Now.AddHours(3), endDate = DateTime.Now.AddHours(5) }
             };
 
-            _mockReservationService.Setup(service => service.GetReservations(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<int?>(), It.IsAny<int?>()))
+            _mockReservationService.Setup(service => service.GetReservations(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<int?>(), It.IsAny<int?>(), false))
                 .Returns(mockReservations);
 
             // Act
@@ -92,7 +92,7 @@ namespace app_server.Tests.Adapters
             // Assert
             Assert.NotNull(result);
             Assert.Equal(mockReservations.Count, result.Count());
-            _mockReservationService.Verify(service => service.GetReservations(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<int?>(), It.IsAny<int?>()), Times.Once);
+            _mockReservationService.Verify(service => service.GetReservations(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<int?>(), It.IsAny<int?>(), false), Times.Once);
         }
 
         

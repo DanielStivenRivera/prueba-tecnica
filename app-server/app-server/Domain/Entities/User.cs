@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace app_server.Domain.Entities;
 
@@ -16,6 +17,7 @@ public class User
     public string username { get; set; }
     
     [Required]
+    [JsonIgnore]
     public string password { get; set; }
     
     [Required]
